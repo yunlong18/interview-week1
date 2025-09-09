@@ -32,3 +32,30 @@
    $ git add .
    $ git commit -m "init: spring boot skeleton"
    ```
+
+## Day 2: 创建 RESTful API
+
+### CURL 常用参数
+
+- `-X` 或 `--request`：指定请求方法（GET、POST、PUT、DELETE 等）。
+- `-H` 或 `--header`：添加请求头信息。
+- `-d` 或 `--data`：发送请求体数据，通常用于 POST 或 PUT 请求。
+- `-i`：显示响应头信息。
+- `-v`：显示详细的请求和响应信息，便于调试。
+
+### 测试接口
+
+#### 获取订单信息
+
+```bash
+curl http://localhost:8080/orders/123 -i -H "Accept: application/json" 
+```
+
+#### 注册新用户
+
+```bash
+# 正常请求
+curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpass"}' http://localhost:8080/api/registration
+# 异常请求
+curl -X POST -H "Content-Type: application/json" -d '{"username":"","password":""}' http://localhost:8080/api/registration
+```
