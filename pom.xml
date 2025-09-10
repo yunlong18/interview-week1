@@ -29,6 +29,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
 
@@ -55,6 +56,11 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -79,7 +85,23 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<!-- 设置MapStruct的默认组件模型为Spring -->
+						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
+						<!-- 忽略未映射的目标属性 -->
+						<compilerArg>-Amapstruct.unmappedTargetPolicy=IGNORE</compilerArg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -51,11 +51,28 @@
 curl -i -H "Accept: application/json" "http://localhost:8080/api/orders/1"
 ```
 
+#### 创建新订单
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"product":"Sample Product","quantity":2}' http://localhost:8080/api/orders
+```
+
 #### 注册新用户
 
 ```bash
 # 正常请求
-curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpass"}' http://localhost:8080/api/registration
+curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpass"}' http://localhost:8080/api/users/register
 # 异常请求
-curl -X POST -H "Content-Type: application/json" -d '{"username":"","password":""}' http://localhost:8080/api/registration
+curl -X POST -H "Content-Type: application/json" -d '{"username":"","password":""}' http://localhost:8080/api/users/register
+```
+
+#### 登录
+
+```bash
+# 正常请求
+curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpass"}' http://localhost:8080/api/users/login
+# 用户名不存在
+curl -X POST -H "Content-Type: application/json" -d '{"username":"testusera","password":"testpass"}' http://localhost:8080/api/users/login
+# 密码错误
+curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"wrongpass"}' http://localhost:8080/api/users/login
 ```
