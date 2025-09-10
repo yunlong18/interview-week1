@@ -48,7 +48,7 @@
 #### 获取订单信息
 
 ```bash
-curl http://localhost:8080/orders/123 -i -H "Accept: application/json" 
+curl -i -H "Accept: application/json" "http://localhost:8080/api/orders/1"
 ```
 
 #### 注册新用户
