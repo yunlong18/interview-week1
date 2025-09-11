@@ -53,7 +53,7 @@ class FooController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody FooDTO resource) {
+    public void update(@PathVariable("id") Long id, @RequestBody @Valid FooDTO resource) {
         Preconditions.checkNotNull(resource);
         RestPreconditions.checkNotFound(fooService.findById(id));
         fooService.update(id, fooMapper.toEntity(resource));

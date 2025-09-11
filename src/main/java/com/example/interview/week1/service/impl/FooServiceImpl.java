@@ -1,41 +1,34 @@
 package com.example.interview.week1.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.stereotype.Service;
 
 import com.example.interview.week1.entity.Foo;
+import com.example.interview.week1.repository.FooRepository;
 import com.example.interview.week1.service.FooService;
 
 @Service
 public class FooServiceImpl implements FooService {
 
-    private List<Foo> foos = new ArrayList<>(List.of(
-            new Foo(1L, "foo1", "description1"),
-            new Foo(2L, "foo2", "description2")));
+    private final FooRepository fooRepository;
 
-    private AtomicLong idGenerator = new AtomicLong(foos.size());
+    public FooServiceImpl(FooRepository fooRepository) {
+        this.fooRepository = fooRepository;
+    }
 
     @Override
     public List<Foo> findAll() {
-        return foos;
+        return fooRepository.findAll();
     }
 
     @Override
     public Foo findById(Long id) {
-        return foos.stream()
-                .filter(foo -> foo.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return fooRepository.findById(id).orElse(null);
     }
 
     @Override
     public Long create(Foo foo) {
-        foo.setId(idGenerator.incrementAndGet());
-        foos.add(foo);
-        return foo.getId();
+        return fooRepository.save(foo).getId();
     }
 
     @Override
@@ -44,12 +37,13 @@ public class FooServiceImpl implements FooService {
         if (existingFoo != null) {
             existingFoo.setName(foo.getName());
             existingFoo.setDescription(foo.getDescription());
+            fooRepository.save(existingFoo);
         }
         return existingFoo;
     }
 
     @Override
     public void delete(Long id) {
-        foos.removeIf(foo -> foo.getId().equals(id));
+        fooRepository.deleteById(id);
     }
 }

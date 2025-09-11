@@ -76,3 +76,35 @@ curl -X POST -H "Content-Type: application/json" -d '{"username":"testusera","pa
 # 密码错误
 curl -X POST -H "Content-Type: application/json" -d '{"username":"testuser","password":"wrongpass"}' http://localhost:8080/api/users/login
 ```
+
+## Day 3: 使用 JPA 进行数据持久化
+
+### 测试列表查询
+
+```bash
+curl -i -H "Accept: application/json" "http://localhost:8080/api/foos"
+```
+
+### 测试创建新 Foo
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"name":"New Foo","description":"This is a new foo"}' http://localhost:8080/api/foos
+```
+
+### 测试根据 ID 查询
+
+```bash
+curl -i -H "Accept: application/json" "http://localhost:8080/api/foos/1"
+```
+
+### 测试更新 Foo
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"Updated Foo","description":"This is an updated foo"}' http://localhost:8080/api/foos/1
+```
+
+### 测试删除 Foo
+
+```bash
+curl -X DELETE -H "Accept: application/json" "http://localhost:8080/api/foos/1"
+```

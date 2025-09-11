@@ -3,9 +3,13 @@ package com.example.interview.week1.dto;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FooDTO {
     private Long id;
     @NotBlank(message = "Name must not be blank")
